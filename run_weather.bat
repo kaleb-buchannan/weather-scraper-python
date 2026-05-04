@@ -1,5 +1,4 @@
 @echo off
-:: Change 'YourName' to your actual Windows username
-cd "C:\Users\YourName\Documents\weather_scraper"
+cd "C:\Users\Kaleb Buchannan\Downloads\Weather_Scraper"
 python weather_scraper.py
 pause

@@ -1,0 +1,24 @@
+# If the data successfully returned, save it to a CSV
+        if data:
+            import csv
+            from datetime import datetime
+            import os
+            
+            # Convert the dataclass to a dictionary
+            row_data = asdict(data)
+            # Add a timestamp so you know when it was scraped
+            row_data['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+            file_exists = os.path.isfile("weather_history.csv")
+            
+            # Open the CSV in "append" mode ('a') so it doesn't overwrite old data
+            with open("weather_history.csv", mode="a", newline="", encoding="utf-8") as file:
+                writer = csv.DictWriter(file, fieldnames=row_data.keys())
+                # If the file is brand new, write the column headers first
+                if not file_exists:
+                    writer.writeheader()
+                
+                # Write the new row of weather data
+                writer.writerow(row_data)
+                
+            print(f"Data saved to weather_history.csv at {row_data['timestamp']}")
